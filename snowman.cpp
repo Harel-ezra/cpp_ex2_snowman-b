@@ -6,11 +6,12 @@
 using namespace std;
 
 using namespace ariel;
-const int megic_number = 10;
+const int megic_number = 10; 
 const int number_len = 8;
 
-std::string ariel::snowman(int n) // (hnlrxytb)
+std::string ariel::snowman(int n) 
 {
+    // input checking, len of number (8 numbers) or numbers between 1-4
     if (!input_checking(n))
     {
         throw std::invalid_argument("out of range");
@@ -18,13 +19,18 @@ std::string ariel::snowman(int n) // (hnlrxytb)
 
     std::string _snowman;
 
+// (hat/nose/left eye/ritgh eye/left arm/ritgh arm/torse/base)  
+
+// build base
     std::string _base = base(n % megic_number);
     n /= megic_number;
 
+// build torso
     std::string _torso = torso(n % megic_number);
     n /= megic_number;
 
-    bool up_right_arm = false;
+// build arm
+    bool up_right_arm = false; // up or down arm
     std::string __right_arm = right_arm(n % megic_number);
     if (n % megic_number == 2)
     {
@@ -40,16 +46,21 @@ std::string ariel::snowman(int n) // (hnlrxytb)
     }
     n /= megic_number;
 
+//build eye
     std::string _right_eye = eye(n % megic_number);
     n /= megic_number;
 
     std::string _left_eye = eye(n % megic_number);
     n /= megic_number;
 
+//build nose
     std::string _nose_mouth = nose_mouth(n % megic_number);
     n /= megic_number;
 
+//and the last is build hat
     std::string _hat = hat(n % megic_number);
+
+// build the full string of the snowma..
     if (up_right_arm && up_left_arm)
     {
         _snowman = _hat + "\n" + __left_arm + "(" + _left_eye + _nose_mouth + _right_eye + ")" + __right_arm + "\n(" + _torso + ")\n(" + _base + ")\n";
@@ -69,6 +80,7 @@ std::string ariel::snowman(int n) // (hnlrxytb)
     return _snowman;
 }
 
+//build the hat
 std::string hat(int n)
 {
     std::string _hat_sm;
@@ -81,7 +93,7 @@ std::string hat(int n)
         _hat_sm = " ___ \n.....";
         break;
     case 3:
-        _hat_sm = " _  \n/_\\ ";
+        _hat_sm = "  _  \n /_\\ ";
         break;
     case 4:
         _hat_sm = " ___ \n(_*_)";
@@ -91,6 +103,8 @@ std::string hat(int n)
     }
     return _hat_sm;
 }
+
+//build the nose
 std::string nose_mouth(int n)
 {
     std::string _nose_mouth_sm;
@@ -113,6 +127,8 @@ std::string nose_mouth(int n)
     }
     return _nose_mouth_sm;
 }
+
+//build the eye
 std::string eye(int n)
 {
     std::string _eye_sm;
@@ -136,6 +152,7 @@ std::string eye(int n)
     return _eye_sm;
 }
 
+//build arm
 std::string left_arm(int n)
 {
     std::string _left_arm_sm;
@@ -180,6 +197,7 @@ std::string right_arm(int n)
     }
     return _right_arm_sm;
 }
+// build torse
 std::string torso(int n)
 {
     std::string _torso_sm;
@@ -202,6 +220,8 @@ std::string torso(int n)
     }
     return _torso_sm;
 }
+
+// and build the base
 std::string base(int n)
 {
     std::string _base_sm;
@@ -225,6 +245,7 @@ std::string base(int n)
     return _base_sm;
 }
 
+// cheking valid number
 bool input_checking(int n)
 {
     int counter = 0;
@@ -249,8 +270,3 @@ bool input_checking(int n)
     return true;
 }
 
-// int main()
-// {
-//     cout << ariel::snowman(11114412);
-//     return 0;
-// }
