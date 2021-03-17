@@ -6,8 +6,8 @@
 using namespace std;
 
 using namespace ariel;
-#define megic_number 10
-#define number_len 8
+const int megic_number = 10;
+const int number_len = 8;
 
 std::string ariel::snowman(int n) // (hnlrxytb)
 {
@@ -228,22 +228,23 @@ std::string base(int n)
 bool input_checking(int n)
 {
     int counter = 0;
+    bool f=false;
     while (number_len > counter)
     {
         if (0 == n)
         {
-            return false;
+            return f;
         }
         if ((n % megic_number > 4) || (n % megic_number < 1))
         {
-            return false;
+            return f;
         }
         n /= megic_number;
         counter++;
     }
     if (n > 0)
     {
-        return false;
+        return f;
     }
     return true;
 }
